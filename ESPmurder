@@ -1,0 +1,36 @@
+local contextActionService = game:GetService('ContextActionService')
+
+function ESP()
+	for i, v in pairs(game.Players:GetPlayers()) do
+		if v.Character then
+			local humanoid = v.Character:FindFirstChildOfClass("Humanoid")
+			if humanoid then
+				local size = humanoid.RootPart:GetBoundingBox().Size
+				if v.Backpack:FindFirstChild("Knife") or v.Character:FindFirstChild("Knife") then
+					local esp = Instance.new("BoxHandleAdornment")
+					esp.Parent = v.Character.Torso
+					esp.Size = size
+					esp.Color3 = Color3.new(255, 0, 0)
+					esp.AlwaysOnTop = true
+					esp.Adornee = v.Character.Head
+					esp.Visible = true
+					esp.ZIndex = 2
+				end
+				if v.Backpack:FindFirstChild("Gun") or v.Character:FindFirstChild("Gun") then
+					local esp = Instance.new("BoxHandleAdornment")
+					esp.Parent = v.Character.Torso
+					esp.Size = size
+					esp.Color3 = Color3.new(0, 0, 255)
+					esp.AlwaysOnTop = true
+					esp.Adornee = v.Character.Head
+					esp.Visible = true
+					esp.ZIndex = 2
+				end
+			end
+		end
+	end
+end
+
+contextActionService:BindAction('Esp', ESP, true, 'Space')
+contextActionService:SetPosition('Esp', UDim2.new(0.72, -5, 0.20, -25))
+contextActionService:SetImage('Esp', '')
